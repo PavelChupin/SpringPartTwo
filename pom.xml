@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.gmail.pavel_chupin</groupId>
+    <artifactId>spring_part_two</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>home_work_lesson1</module>
+        <module>home_work_lesson2</module>
+        <module>home_work_lesson3</module>
+        <module>home_work_lesson4</module>
+        <module>home_work_lesson5</module>
+        <module>home_work_lesson6</module>
+        <module>home_work_lesson7</module>
+        <module>home_work_lesson8</module>
+    </modules>
+
+    <properties>
+        <project.buid.sourceEncoding>UTF-8</project.buid.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source><!-- версия исходников-->
+        <maven.compiler.target>11</maven.compiler.target><!-- версия с которой можно запустить приложение-->
+    </properties>
+</project>
