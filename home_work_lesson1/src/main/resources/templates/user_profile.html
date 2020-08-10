@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>July Market</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Users)}"/>
+    <h2 th:text="'Профиль пользователя: ' + ${user.getLogin()}"></h2>
+    <p th:text="'ФИО: ' + ${user.getFullName()}"></p>
+    <p th:text="'Телефон: ' + ${user.getPhone()}"></p>
+    <p th:text="'Почта: ' + ${user.getEmail()}"></p>
+    <p th:text="'Почта: ' + ${user.getRolesString()}"></p>
+
+    <form th:action="@{'/users/block/' + ${user.getId()}}" method="GET">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input"
+                   th:checked="${user.getBlock()}" th:id="${user.getId()}" name="block">
+            <label class="custom-control-label" th:text="${user.getBlock() ? 'Блокирован' : 'Активен'}"
+                   th:for="${user.getId()}"></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Применить</button>
+    </form>
+</div>
+</body>
+</html>
