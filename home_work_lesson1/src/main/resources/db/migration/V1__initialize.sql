@@ -8,33 +8,33 @@ insert into categories
 ('Berries');
 
 drop table if exists products cascade;
-create table products (id bigserial, title varchar(255), description varchar(5000), price int, primary key(id));
+create table products (id bigserial, title varchar(255), description varchar(5000), price numeric(8,2), primary key(id));
 insert into products
 (title, description, price) values
-('Cheese', 'Fresh cheese', 320),
-('Milk', 'Fresh milk', 80),
-('Apples', 'Fresh apples', 80),
-('Bread', 'Fresh bread', 30),
-('Cabbage', '', 1),
-('Strawberry', '', 2),
-('Raspberry', '', 3),
-('Oranges', '', 4),
-('Anion', '', 5),
-('A6', '', 6),
-('A7', '', 7),
-('A8', '', 8),
-('A9', '', 9),
-('A10', '', 10),
-('A11', '', 11),
-('A12', '', 12),
-('A13', '', 13),
-('A14', '', 14),
-('A15', '', 15),
-('A16', '', 16),
-('A17', '', 17),
-('A18', '', 18),
-('A19', '', 19),
-('A20', '', 20);
+('Cheese', 'Fresh cheese', 320.0),
+('Milk', 'Fresh milk', 80.0),
+('Apples', 'Fresh apples', 80.0),
+('Bread', 'Fresh bread', 30.0),
+('Cabbage', '', 1.0),
+('Strawberry', '', 2.0),
+('Raspberry', '', 3.0),
+('Oranges', '', 4.0),
+('Anion', '', 5.0),
+('A6', '', 6.0),
+('A7', '', 7.0),
+('A8', '', 8.0),
+('A9', '', 9.0),
+('A10', '', 10.0),
+('A11', '', 11.0),
+('A12', '', 12.0),
+('A13', '', 13.0),
+('A14', '', 14.0),
+('A15', '', 15.0),
+('A16', '', 16.0),
+('A17', '', 17.0),
+('A18', '', 18.0),
+('A19', '', 19.0),
+('A20', '', 20.0);
 
 
 drop table if exists incl_prod_in_categ;

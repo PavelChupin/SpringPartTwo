@@ -56,7 +56,7 @@
             <td>Id</td>
             <td>Название</td>
             <td>Цена</td>
-            <td>Операции</td>
+            <!--<td>Операции</td>-->
             <td>Купить</td>
         </tr>
         </thead>
@@ -66,8 +66,8 @@
             <td th:text="${p.id}"></td>
             <td th:text="${p.title}"></td>
             <td th:text="${p.price}"></td>
-            <td><a th:href="@{'/products/edit/' + ${p.id}}">Редактировать</a></td>
-            <td><a th:href="@{'/basket/add/' + ${p.id}}">В корзину</a></td>
+            <!--<td><a th:href="@{'/products/edit/' + ${p.id}}">Редактировать</a></td>-->
+            <td><a class="btn btn-primary" th:href="@{'/basket/add/' + ${p.id}}">В корзину</a></td>
             <!--<td><button type="button" th:onclick="${@basket.addProduct(p)}">В корзину</button></td>-->
         </tr>
         </tbody>
