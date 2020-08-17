@@ -11,6 +11,7 @@ public class JulyMarketApplication {
     // через REST API
     // 3. Сделайте так, чтобы через форму можно было добавлять товары
     // * 4. Сделайте basic authentication для REST API
+
     public static void main(String[] args) {
         SpringApplication.run(JulyMarketApplication.class, args);
     }
