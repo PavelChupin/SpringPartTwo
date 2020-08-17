@@ -5,13 +5,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>July Market</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <!--<script src="controllers.js"></script>-->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body ng-app="productApp">
 <div class="container">
     <div th:replace="~{navigation :: navigation(Market)}"/>
 
@@ -50,27 +53,33 @@
     </form>
 
     <h4>Список товаров:</h4>
-    <table class="table table-striped">
+    <table class="table table-striped" ng-controller="allProducts">
         <thead>
         <tr>
             <td>Id</td>
             <td>Название</td>
             <td>Цена</td>
-            <td>Операции</td>
+            <!--<td>Операции</td>-->
             <td>Купить</td>
         </tr>
         </thead>
-        <tbody>
+        <tbody ng-repeat="p in Products">
+        <tr>
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price}}</td>
+            <td><a class="btn btn-primary" href="basket/add/{{p.id}}">В корзину</a></td>
+        </tr>
+        </tbody>
 
+        <!--<tbody>
         <tr th:each="p : ${products.getContent()}">
             <td th:text="${p.id}"></td>
             <td th:text="${p.title}"></td>
             <td th:text="${p.price}"></td>
-            <td><a th:href="@{'/products/edit/' + ${p.id}}">Редактировать</a></td>
-            <td><a th:href="@{'/basket/add/' + ${p.id}}">В корзину</a></td>
-            <!--<td><button type="button" th:onclick="${@basket.addProduct(p)}">В корзину</button></td>-->
+            <td><a class="btn btn-primary" th:href="@{'/basket/add/' + ${p.id}}">В корзину</a></td>
         </tr>
-        </tbody>
+        </tbody>-->
     </table>
 
     <nav aria-label="Page navigation">
@@ -93,4 +102,18 @@
     </nav>
 </div>
 </body>
+<script>
+    var app = angular.module('productApp', []);
+    app.controller('allProducts', function ($scope, $http) {
+        fillTable = function () {
+            $http.get("http://localhost:8189/market/api/v1/products",{
+                headers: {'Authorization': 'Basic Kzc5MTM3MzgyODk5OjEwMA==', 'Content-Type': 'application/json'}})
+                .then(function (response) {
+                    $scope.Products = response.data;
+                });
+        };
+
+        fillTable();
+    });
+</script>
 </html>
