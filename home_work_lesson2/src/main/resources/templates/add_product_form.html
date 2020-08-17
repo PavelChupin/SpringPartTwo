@@ -44,7 +44,8 @@
             product: {}, Demos: []})
 
         $scope.submitForm = function(form) {
-            $http.post("http://localhost:8189/market/api/v1/products",$scope.product)
+            $http.post("http://localhost:8189/market/api/v1/products",$scope.product,{
+                headers: {'Authorization': 'Basic Kzc5MTM3MzgyODk5OjEwMA==', 'Content-Type': 'application/json'}})
                 .then(function(response) {
                     console.log(123);
                     $scope.Demos.push(response.data);
