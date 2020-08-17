@@ -31,7 +31,9 @@
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item" th:classappend="${activeTab == 'Users' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{'/users'}" th:text="#{nav.users}"></a>
                 </li>
-
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item" th:classappend="${activeTab == 'NewProduct' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{'/products/add'}" th:text="#{nav.new_product}"></a>
+                </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item">
                     <form th:action="@{/logout}" method="POST">
                         <button id="navLogout" class="btn btn-outline-secondary" type="submit"  th:text="#{nav.logout}"></button>

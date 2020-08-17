@@ -35,6 +35,7 @@ public class RestProductsController {
     @GetMapping(produces = "application/json")
     @ApiOperation("Returns list of all products")
     public List<Product> getAllProducts() {
+        System.out.println("AllProduct - Start");
         return productsService.findAll();
     }
 
@@ -63,6 +64,7 @@ public class RestProductsController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("Creates a new product")
     public Product saveNewProduct(@RequestBody Product product) {
+        System.out.println(product);
         if (product.getId() != null) {
             product.setId(null);
         }
