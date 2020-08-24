@@ -1,6 +1,6 @@
 package com.geekbrains.july.market.julymarket.utils;
 
-import com.geekbrains.july.market.julymarket.entities.Catergory;
+import com.geekbrains.july.market.julymarket.entities.Category;
 import com.geekbrains.july.market.julymarket.entities.Product;
 import com.geekbrains.july.market.julymarket.repositories.specifications.ProductSpecifications;
 import lombok.Getter;
@@ -14,7 +14,7 @@ public class ProductFilter {
     private Specification<Product> spec;
     private StringBuilder filterDefinition;
 
-    public ProductFilter(Map<String, String> map, List<Catergory> categories) {
+    public ProductFilter(Map<String, String> map, List<Category> categories) {
         this.spec = Specification.where(null);
         this.filterDefinition = new StringBuilder();
         if (map.containsKey("min_price") && !map.get("min_price").isEmpty()) {
@@ -37,7 +37,7 @@ public class ProductFilter {
         //Обрабатываем фильтр категорий
         Specification categorySpec = null;
         //Сосавляем перечень категорий из входных параметров
-        for (Catergory c : categories) {
+        for (Category c : categories) {
             if (map.get(c.getTitle()) != null && "on".equals(map.get(c.getTitle()))) {
                 if (categorySpec == null) {
                     categorySpec = ProductSpecifications.findProductByCategory(c);

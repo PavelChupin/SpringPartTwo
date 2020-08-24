@@ -35,6 +35,7 @@ public class RestProductsController {
     @GetMapping(produces = "application/json")
     @ApiOperation("Returns list of all products")
     public List<Product> getAllProducts() {
+        System.out.println("AllProduct - Start");
         return productsService.findAll();
     }
 
@@ -63,6 +64,7 @@ public class RestProductsController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("Creates a new product")
     public Product saveNewProduct(@RequestBody Product product) {
+        System.out.println(product);
         if (product.getId() != null) {
             product.setId(null);
         }
@@ -75,7 +77,7 @@ public class RestProductsController {
         if (product.getId() == null || !productsService.existsById(product.getId())) {
             throw new ProductNotFoundException("Product not found, id: " + product.getId());
         }
-        if (product.getPrice() < 0) {
+        if (product.getPrice().doubleValue() < 0.0) {
             return new ResponseEntity<>("Product's price can not be negative", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(productsService.saveOrUpdate(product), HttpStatus.OK);

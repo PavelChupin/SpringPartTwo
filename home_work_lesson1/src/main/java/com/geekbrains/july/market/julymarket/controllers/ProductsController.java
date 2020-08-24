@@ -1,8 +1,7 @@
 package com.geekbrains.july.market.julymarket.controllers;
 
 
-import com.geekbrains.july.market.julymarket.basket.Basket;
-import com.geekbrains.july.market.julymarket.entities.Catergory;
+import com.geekbrains.july.market.julymarket.entities.Category;
 import com.geekbrains.july.market.julymarket.entities.Product;
 import com.geekbrains.july.market.julymarket.services.CategoriesService;
 import com.geekbrains.july.market.julymarket.services.ProductsService;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +30,7 @@ public class ProductsController {
     @GetMapping
     public String showAll(Model model, @RequestParam Map<String, String> requestParams) {
         Integer pageNumber = Integer.parseInt(requestParams.getOrDefault("p", "1"));
-        List<Catergory> categories = categoriesService.findAll();
+        List<Category> categories = categoriesService.findAll();
         ProductFilter productFilter = new ProductFilter(requestParams, categories);
         Page<Product> products = productsService.findAll(productFilter.getSpec(), pageNumber);
         model.addAttribute("products", products);
