@@ -3,6 +3,7 @@ package com.geekbrains.july.market.julymarket.configs;
 import com.geekbrains.july.market.julymarket.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity  //(debug = true)
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@Order(100)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UsersService usersService;
 
@@ -22,31 +24,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      /*  http.authorizeRequests()
-                .antMatchers("/security/**").authenticated()
-                .antMatchers("/admins/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
+      //  http.authorizeRequests()
+       //         .antMatchers("/security/**").authenticated()
+       //         .antMatchers("/admins/**").hasAnyRole("ADMIN", "SUPERADMIN") // ROLE_ADMIN, ROLE_SUPERADMIN
                 //.antMatchers("/emails/**").hasAnyAuthority("CAN_READ_EMAIL") // CAN_READ_EMAIL
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
+        //        .anyRequest().permitAll()
+         //       .and()
+         //       .formLogin()
 
                //Страница авторизации
-               .loginPage("/login")
+         //      .loginPage("/login")
                  //Перенаправление на страницу после авторизации
-                .loginProcessingUrl("/authenticate")
-                .permitAll()
-                .and()
+        //        .loginProcessingUrl("/authenticate")
+        //        .permitAll()
+        //        .and()
                 //Активирует разлогирование
-                .logout()
+         //       .logout()
                 //Перенаправление на страницу после разлогирования
-                .logoutSuccessUrl("/")
-                .permitAll();*/
+        //        .logoutSuccessUrl("/")
+         //       .permitAll();
         http.authorizeRequests()
                 .antMatchers("/users/**").authenticated()
                 .antMatchers("/users/**").hasAnyRole("ADMIN")
+                .antMatchers("/products/add").hasAnyRole("ADMIN")
                 .antMatchers("/orders/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
+                //.httpBasic()
                 .formLogin()
                 //Страница авторизации
                 .loginPage("/login")
@@ -74,20 +78,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     //Задание фиксированных пользователей
-        /*@Bean
-          public UserDetailsService users() {
-            UserDetails user = User.builder()
-                    .username("user")
-                    .password("{bcrypt}$2y$12$mFUdPh8.ESnhu.eyDjxrYuSigUIOboDP94mt7vuNhf604Yw0iuKQa")
-                    .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password("{bcrypt}$2y$12$mFUdPh8.ESnhu.eyDjxrYuSigUIOboDP94mt7vuNhf604Yw0iuKQa")
-                .roles("USER", "ADMIN")
-               .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }*/
+       // @Bean
+       //   public UserDetailsService users() {
+        //    UserDetails user = User.builder()
+          //          .username("user")
+           //         .password("{bcrypt}$2y$12$mFUdPh8.ESnhu.eyDjxrYuSigUIOboDP94mt7vuNhf604Yw0iuKQa")
+           //         .roles("USER")
+          //      .build();
+       // UserDetails admin = User.builder()
+       //         .username("admin")
+        //        .password("{bcrypt}$2y$12$mFUdPh8.ESnhu.eyDjxrYuSigUIOboDP94mt7vuNhf604Yw0iuKQa")
+        //        .roles("USER", "ADMIN")
+       //        .build();
+      //  return new InMemoryUserDetailsManager(user, admin);
+  //  }
+
 //Задание фиксированных пользователей через JDBC
 //    @Bean
 //    public JdbcUserDetailsManager users(DataSource dataSource) {

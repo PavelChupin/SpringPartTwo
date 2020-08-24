@@ -1,38 +1,47 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Корзина покупок</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>July Market</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-<div th:replace="~{navigation :: navigation(Basket)}"/>
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Basket)}"/>
 
-<h4>Список товаров в корзне</h4>
+    <h2>Корзина</h2>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <td>Id</td>
-        <td>Название</td>
-        <td>Цена</td>
-        <td>Удалить</td>
-    </tr>
-    </thead>
-    <tbody>
+    <span th:unless="${basket.items.size() > 0}">Ваша корзина пуста</span>
+    <table class="table table-striped" th:if="${basket.items.size() > 0}">
+        <thead>
+        <tr>
+            <td>Название</td>
+            <td>Количество</td>
+            <td>Цена</td>
+            <td>Операции</td>
+        </tr>
+        </thead>
+        <tbody>
 
-    <tr th:each="p : ${products}">
-        <td th:text="${p.id}"></td>
-        <td th:text="${p.title}"></td>
-        <td th:text="${p.price}"></td>
-        <td><a th:href="@{'/basket/delete/' + ${p.id}}">Удалить</a></td>
-    </tr>
-    </tbody>
-</table>
-<td><a th:href="@{'/basket/clear'}">Очистить корзину</a></td>
+        <tr th:each="i : ${basket.getItems()}">
+            <td th:text="${i.product.title}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{'/basket/decrement/' + ${i.product.id}}">-</a>
+                <span th:text="'  ' + ${i.quantity} + '  '"/>
+                <a class="btn btn-primary" th:href="@{'/basket/add/' + ${i.product.id}}">+</a>
+            </td>
+            <td th:text="${i.price}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/basket/remove/' + ${i.product.id}}">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" th:href="@{'/orders/create'}" th:if="${basket.items.size() > 0}">Оформить заказ</a>
+</div>
 </body>
 </html>

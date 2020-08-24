@@ -1,6 +1,6 @@
 package com.geekbrains.july.market.julymarket.services;
 
-import com.geekbrains.july.market.julymarket.entities.Catergory;
+import com.geekbrains.july.market.julymarket.entities.Category;
 import com.geekbrains.july.market.julymarket.repositories.CategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +16,11 @@ public class CategoriesService {
         this.categoriesRepository = categoriesRepository;
     }
 
-    public List<Catergory> findAll() {
+    public List<Category> findAll() {
         return categoriesRepository.findAll();
     }
 
+    public List<Category> getCategoriesByIds(List<Long> ids) {
+        return categoriesRepository.findAllById(ids);
+    }
 }
