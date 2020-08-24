@@ -106,7 +106,8 @@
     var app = angular.module('productApp', []);
     app.controller('allProducts', function ($scope, $http) {
         fillTable = function () {
-            $http.get("http://localhost:8189/market/api/v1/products")
+            $http.get("http://localhost:8189/market/api/v1/products",{
+                headers: {'Authorization': 'Basic Kzc5MTM3MzgyODk5OjEwMA==', 'Content-Type': 'application/json'}})
                 .then(function (response) {
                     $scope.Products = response.data;
                 });
